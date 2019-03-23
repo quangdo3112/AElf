@@ -201,7 +201,7 @@ namespace AElf.Kernel.Blockchain.Domain
 
             Logger.LogInformation($"Attach {chainBlockLink.BlockHash} to longest chain, status: {status}, " +
                                   $"longest chain height: {chain.LongestChainHeight}, longest chain hash: {chain.LongestChainHash}");
-            Logger.LogTrace($"Not linked blocks: {chain.NotLinkedBlocks}, branches: {chain.Branches}");
+            Logger.LogTrace($"Chain Info: {chain}");
 
             return status;
         }
@@ -359,6 +359,7 @@ namespace AElf.Kernel.Blockchain.Domain
                 }
             }
 
+            Logger.LogTrace($"Cleanup chain info: {chain}");
             Logger.LogTrace($"Cleanup branches: [{toCleanBranchKeys.JoinAsString(",")}]");
             Logger.LogTrace($"Cleanup blocks: [{toRemoveBlocks.JoinAsString(",")}]");
 
