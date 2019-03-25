@@ -53,10 +53,9 @@ namespace AElf.Kernel.SmartContract.Application
             }
 
             var reversedBlockIndexes = await _blockchainService.GetReversedBlockIndexes(lastIrreversibleBlockHash, (int) mergeCount);
-
+            reversedBlockIndexes.Reverse();
+            
             blockIndexes.AddRange(reversedBlockIndexes);
-
-            blockIndexes.Reverse();
 
             blockIndexes.Add(new BlockIndex(lastIrreversibleBlockHash, lastIrreversibleBlockHeight));
 
