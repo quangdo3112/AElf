@@ -136,6 +136,12 @@ namespace AElf.Kernel.Blockchain.Domain
         public async Task<BlockAttachOperationStatus> AttachBlockToChainAsync(Chain chain, ChainBlockLink chainBlockLink)
         {
             BlockAttachOperationStatus status = BlockAttachOperationStatus.None;
+            
+            var existChainBlockLink = await GetChainBlockLinkAsync(chainBlockLink.BlockHash);
+            if (existChainBlockLink != null)
+            {
+                return status;
+            }
 
             while (true)
             {
