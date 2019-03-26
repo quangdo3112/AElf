@@ -218,7 +218,7 @@ namespace AElf.Kernel.Blockchain.Application
 
         public async Task<BlockAttachOperationStatus> AttachBlockToChainAsync(Chain chain, Block block)
         {
-            var status = await _chainManager.AttachBlockToChainAsync(chain, new ChainBlockLink
+            var status = await _chainManager.AttachBlockToChainAsync(chain, new ChainBlockLink()
             {
                 Height = block.Header.Height,
                 BlockHash = block.Header.GetHash(),
