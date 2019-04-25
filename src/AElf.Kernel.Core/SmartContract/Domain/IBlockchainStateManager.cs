@@ -64,7 +64,7 @@ namespace AElf.Kernel.SmartContract.Domain
                     if (bestChainState.BlockHeight >= blockHeight)
                     {
                         //because we may clear history state
-                        throw new InvalidOperationException("cannot read history state");
+                        throw new InvalidOperationException($"cannot read history state. BestChainState.BlockHeight : {bestChainState.BlockHeight}, blockHeight : {blockHeight}, blockHash :{blockHash}");
                     }
                     else
                     {

@@ -98,6 +98,10 @@ namespace AElf.Kernel.Blockchain.Application
             if (_blockchainServce.GetChainId() != block.Header.ChainId)
                 return false;
 
+            var chain = await _blockchainServce.GetChainAsync();
+            if (block.Height <= chain.LastIrreversibleBlockHeight)
+                return false;
+
             if (block.Height != KernelConstants.GenesisBlockHeight && !block.VerifySignature())
                 return false;
 
