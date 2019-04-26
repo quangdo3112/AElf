@@ -7,5 +7,7 @@ namespace AElf.Kernel.Consensus.Application
         public const string ValidateConsensusAfterExecution = "ValidateConsensusAfterExecution";
         public const string GetInformationToUpdateConsensus = "GetInformationToUpdateConsensus";
         public const string GenerateConsensusTransactions = "GenerateConsensusTransactions";
+
+        public const float BlockMiningTimeRatio = 0.4f;
     }
 }

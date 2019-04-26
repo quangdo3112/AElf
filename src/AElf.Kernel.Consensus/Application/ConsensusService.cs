@@ -45,7 +45,7 @@ namespace AElf.Kernel.Consensus.Application
                 chainContext.BlockHeight,
                 _consensusControlInformation.ConsensusCommand.ExpectedMiningTime.ToDateTime(),
                 TimeSpan.FromMilliseconds(_consensusControlInformation.ConsensusCommand
-                    .LimitMillisecondsOfMiningBlock));
+                    .LimitMillisecondsOfMiningBlock * ConsensusConsts.BlockMiningTimeRatio));
             _consensusScheduler.CancelCurrentEvent();
             // TODO: Remove NextBlockMiningLeftMilliseconds.
             _consensusScheduler.NewEvent(_consensusControlInformation.ConsensusCommand.NextBlockMiningLeftMilliseconds,
