@@ -51,7 +51,11 @@ namespace AElf.OS.Network.Grpc
         {
             Logger.LogTrace($"Attempting to reach {ipAddress}.");
 
-            Channel channel = new Channel(ipAddress, ChannelCredentials.Insecure);
+            Channel channel = new Channel(ipAddress, ChannelCredentials.Insecure,
+                new List<ChannelOption>
+                {
+                    new ChannelOption(ChannelOptions.MaxReceiveMessageLength, _networkOptions.MaxReceiveMessageLength)
+                });
 
             var client = new PeerService.PeerServiceClient(channel.Intercept(metadata =>
             {

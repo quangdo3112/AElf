@@ -47,10 +47,13 @@ namespace AElf.OS.Network.Grpc
 
             if (_authInterceptor != null)
                 serviceDefinition = serviceDefinition.Intercept(_authInterceptor);
-            
-            _server = new Server
+
+            _server = new Server(new List<ChannelOption>
             {
-                Services = { serviceDefinition },
+                new ChannelOption(ChannelOptions.MaxReceiveMessageLength, _networkOptions.MaxReceiveMessageLength)
+            })
+            {
+                Services = {serviceDefinition},
                 Ports =
                 {
                     new ServerPort(IPAddress.Any.ToString(), _networkOptions.ListeningPort, ServerCredentials.Insecure)
