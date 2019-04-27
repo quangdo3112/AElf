@@ -99,8 +99,21 @@ namespace AElf.Kernel.Blockchain.Application
                 return false;
 
             var chain = await _blockchainServce.GetChainAsync();
-            if (block.Height <= chain.LastIrreversibleBlockHeight)
-                return false;
+            var blockHeader = block.Header;
+            while (true)
+            {
+                if (blockHeader.Height <= chain.LastIrreversibleBlockHeight)
+                {
+                    return false;
+                }
+
+                if (blockHeader.PreviousBlockHash == chain.LastIrreversibleBlockHash)
+                {
+                    break;
+                }
+
+                blockHeader = await _blockchainServce.GetBlockHeaderByHashAsync(blockHeader.PreviousBlockHash);
+            }
 
             if (block.Height != KernelConstants.GenesisBlockHeight && !block.VerifySignature())
                 return false;
