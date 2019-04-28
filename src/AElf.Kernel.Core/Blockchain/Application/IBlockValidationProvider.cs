@@ -113,6 +113,11 @@ namespace AElf.Kernel.Blockchain.Application
                 }
 
                 blockHeader = await _blockchainServce.GetBlockHeaderByHashAsync(blockHeader.PreviousBlockHash);
+
+                if (blockHeader == null)
+                {
+                    break;
+                }
             }
 
             if (block.Height != KernelConstants.GenesisBlockHeight && !block.VerifySignature())
